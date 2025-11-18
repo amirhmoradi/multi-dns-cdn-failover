@@ -1,0 +1,11 @@
+domain: example.com
+
+router_record: "web-router"
+primary_target: "cf-front"
+secondary_target: "cdn2-front"
+
+primary_check_url: "https://www.example.com/health"
+secondary_check_url: "https://www.example.com/health"
+
+expected_status: 200
+timeout_seconds: 5

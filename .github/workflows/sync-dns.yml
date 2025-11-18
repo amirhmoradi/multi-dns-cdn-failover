@@ -1,0 +1,42 @@
+name: Sync DNS (Cloudflare + deSEC)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "config/zone*.yml"
+      - "scripts/sync_dns.py"
+      - "scripts/common.py"
+      - ".github/workflows/sync-dns.yml"
+  workflow_dispatch: {}
+
+jobs:
+  sync-dns:
+    runs-on: ubuntu-latest
+
+    env:
+      # Set these as GitHub repo or org secrets
+      CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+      DESEC_API_TOKEN: ${{ secrets.DESEC_API_TOKEN }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run sync_dns for example.com
+        run: |
+          source .venv/bin/activate
+          python scripts/sync_dns.py --config config/zone.example.com.yml

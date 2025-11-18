@@ -1,0 +1,18 @@
+[Unit]
+Description=Multi DNS & CDN failover checker (Cloudflare + deSEC)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/multi-dns-failover
+
+# Option 1: export env vars globally in /etc/environment or similar
+# Option 2 (shown here): set them per-service (replace the placeholders!)
+Environment="CF_API_TOKEN=YOUR_CLOUDFLARE_API_TOKEN"
+Environment="DESEC_API_TOKEN=YOUR_DESEC_API_TOKEN"
+
+ExecStart=/opt/multi-dns-failover/.venv/bin/python scripts/failover.py --config config/failover.example.com.yml
+
+[Install]
+WantedBy=multi-user.target
