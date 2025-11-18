@@ -74,7 +74,7 @@ Key records (simplified):
 Clone this repo (or copy its contents):
 
 ```bash
-git clone git@github.com:<your-user>/multi-dns-failover.git
+git clone git@github.com:amirhmoradi/multi-dns-failover.git
 cd multi-dns-failover
 ```
 
@@ -349,7 +349,7 @@ sudo mkdir -p /opt/multi-dns-failover
 sudo chown "$USER":"$USER" /opt/multi-dns-failover
 
 cd /opt/multi-dns-failover
-git clone https://github.com/<your-user>/multi-dns-failover.git .
+git clone https://github.com/amirhmoradi/multi-dns-failover.git .
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
