@@ -1,0 +1,10 @@
+[Unit]
+Description=Run multi-dns-failover health checks periodically
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=2min
+Unit=multi-dns-failover.service
+
+[Install]
+WantedBy=timers.target
